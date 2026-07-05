@@ -4,20 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemik w Sieci | Cyfrowe Laboratorium Bezpieczeństwa</title>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="f9c1e561-0286-4156-b648-e8aa8847e597"></script>
+    <!-- Kod analityki Umami -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 1000px; margin: 0 auto; padding: 20px; }
         header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; text-align: center; }
         h1 { color: #00ffcc; margin: 0; font-size: 2.5em; }
-        h2 { color: #00ffcc; margin-top: 30px; }
-        h3 { margin: 0 0 10px 0; }
+        h2 { color: #00ffcc; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        h3 { margin: 0 0 10px 0; font-size: 1.15em; }
         p { color: #b0b0b0; }
         a { color: #00ffcc; text-decoration: none; }
         a:hover { text-decoration: underline; }
         .tagline { font-style: italic; color: #888; }
+        
+        /* Kontener dla układu dwukolumnowego */
+        .columns-container { display: flex; gap: 30px; margin-top: 40px; }
+        .column { flex: 1; min-width: 280px; }
+        
         .post-card { background: #1c1c1c; border-left: 4px solid #00ffcc; padding: 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
         .date { color: #666; font-size: 0.85em; display: block; margin-bottom: 5px; }
         footer { margin-top: 60px; text-align: center; color: #666; font-size: 0.9em; border-top: 1px solid #222; padding-top: 20px; }
+
+        /* RWD: Na telefonach kolumny ułożą się w pionie */
+        @media (max-width: 768px) {
+            .columns-container { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -30,53 +41,60 @@
     <main>
         <section id="o-projekcie">
             <h2>O laboratorium</h2>
-            <p>W świecie realnym chemicy badają skład toksyn, tworzą na nie odtrutki i pomagają ustalić źródło skażenia. W świecie cyfrowym robię dokładnie to samo. Jestem aktywnym zawodowo ekspekrtem ds. cyberbezpieczeństwa. Z uwagi na charakter mojej pracy oraz bezpieczeństwo operacji, którymi się zajmuję, występuję tutaj inkognito – jako Chemik.</p>
+            <p>W świecie realnym chemicy badają skład toksyn, tworzą na nie odtrutki i pomagają ustalić źródło skażenia. W świecie cyfrowym robię dokładnie to samo. Jestem aktywnym zawodowo ekspertem ds. cyberbezpieczeństwa. Z uwagi na charakter mojej pracy oraz bezpieczeństwo operacji, którymi się zajmuję, występuję tutaj inkognito – jako Chemik.</p>
             <p>Internet został zalany toksycznymi oszustwami. Na tym blogu rozkładam cyberataki na czynniki pierwsze, idę po śladach przestępców (OSINT) i dostarczam szybkie odtrutki w postaci wiedzy.</p>
         </section>
 
-        <section id="procedury" style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;">
-            <h2>Procedury laboratoryjne (Poradniki &amp; Warsztat)</h2>
+        <!-- Początek układu dwukolumnowego -->
+        <div class="columns-container">
             
-            <div class="post-card" style="border-left-color: #ff3366;">
-                <span class="date">05 lipca 2026</span>
-                <h3><a href="procedura-zabezpieczenia-poczty.html">[Procedura] Receptura na bezpieczną domenę: Zaawansowana konfiguracja SPF, DKIM i DMARC</a></h3>
-                <p>Zabezpiecz swoją własną domenę przed podszywaniem się (e-mail spoofing). Praktyczny, zaawansowany przewodnik po wdrażaniu triady SPF, podpisów kryptograficznych DKIM oraz żelaznych reguł DMARC p=reject...</p>
-            </div>
+            <!-- KOLUMNA LEWA: PROCEDURY -->
+            <section class="column" id="procedury">
+                <h2>Procedury laboratoryjne</h2>
+                
+                <div class="post-card" style="border-left-color: #ff3366;">
+                    <span class="date">05 lipca 2026</span>
+                    <h3><a href="procedura-zabezpieczenia-poczty.html">[Procedura] Receptura na bezpieczną domenę: SPF, DKIM i DMARC</a></h3>
+                    <p>Zabezpiecz swoją domenę przed podszywaniem się. Zaawansowany przewodnik po wdrażaniu triady SPF, podpisów DKIM oraz żelaznych reguł DMARC...</p>
+                </div>
 
-            <div class="post-card" style="border-left-color: #ff3366;">
-                <span class="date">05 lipca 2026</span>
-                <h3><a href="procedura-osint-metadane.html">[Procedura] Cyfrowy zwiad: Jak wyciągać ukryte metadane z plików i zdjęć za pomocą ExifTool?</a></h3>
-                <p>Odkryj ukrytą warstwę danych w swoich plikach. Praktyczny poradnik OSINT pokazujący, jak wyciągać współrzędne GPS ze zdjęć, dane autora z PDF-ów oraz jak skutecznie czyścić te ślady przed publikacją...</p>
-            </div>
+                <div class="post-card" style="border-left-color: #ff3366;">
+                    <span class="date">05 lipca 2026</span>
+                    <h3><a href="procedura-osint-metadane.html">[Procedura] Cyfrowy zwiad: Wyciąganie metadanych z plików za pomocą ExifTool</a></h3>
+                    <p>Odkryj ukrytą warstwę danych. Praktyczny poradnik OSINT pokazujący, jak wyciągać współrzędne GPS ze zdjęć i jak bezpiecznie czyścić te ślady...</p>
+                </div>
 
-            <div class="post-card" style="border-left-color: #ff3366;">
-                <span class="date">05 lipca 2026</span>
-                <h3><a href="procedura-naglowki-email.html">[Procedura] Czytanie z cyfrowych fusów: Jak analizować nagłówki e-mail i wykryć spoofing?</a></h3>
-                <p>Praktyczny przewodnik po nagłówkach internetowych (e-mail headers). Dowiedz się, jak krok po kroku czytać linie Received, weryfikować filtry SPF/DKIM i ujawniać sfałszowane maile...</p>
-            </div>
-        </section>
+                <div class="post-card" style="border-left-color: #ff3366;">
+                    <span class="date">05 lipca 2026</span>
+                    <h3><a href="procedura-naglowki-email.html">[Procedura] Czytanie z cyfrowych fusów: Analiza nagłówków e-mail</a></h3>
+                    <p>Praktyczny przewodnik po nagłówkach internetowych. Dowiedz się, jak krok po kroku czytać linie Received i weryfikować filtry SPF/DKIM...</p>
+                </div>
+            </section>
 
-        <section id="artykuly" style="margin-top: 40px; border-top: 1px solid #333; padding-top: 20px;">
-            <h2>Najnowsze analizy (Incydenty)</h2>
-            
-            <div class="post-card">
-                <span class="date">05 lipca 2026</span>
-                <h3><a href="analiza-phishing-olx.html">[Analiza] Sprzedajesz na OLX? Uważaj na wiadomości na WhatsAppie. Jak oszuści czyszczą konta sprzedawców</a></h3>
-                <p>Analiza popularnego oszustwa wycelowanego w sprzedawców na portalach ogłoszeniowych. Jak boty namierzają nowe oferty i dlaczego żądanie danych karty to pułapka...</p>
-            </div>
+            <!-- KOLUMNA PRAWA: ANALIZY -->
+            <section class="column" id="artykuly">
+                <h2>Analizy incydentów</h2>
+                
+                <div class="post-card">
+                    <span class="date">05 lipca 2026</span>
+                    <h3><a href="analiza-phishing-olx.html">[Analiza] Sprzedajesz na OLX? Uważaj na wiadomości na WhatsAppie</a></h3>
+                    <p>Analiza popularnego oszustwa wycelowanego w sprzedawców. Jak boty namierzają nowe oferty i dlaczego żądanie danych karty to pułapka...</p>
+                </div>
 
-            <div class="post-card">
-                <span class="date">05 lipca 2026</span>
-                <h3><a href="analiza-phishing-m365.html">[Analiza] Nowy phishing na Microsoft 365. Uwierzytelnianie dwuskładnikowe już nie wystarcza?</a></h3>
-                <p>Analiza laboratoryjna zaawansowanych ataków typu Adversary-in-the-Middle (AiTM). Zobacz, jak oszuści kradną ciasteczka sesyjne i jak się przed tym bronić...</p>
-            </div>
+                <div class="post-card">
+                    <span class="date">05 lipca 2026</span>
+                    <h3><a href="analiza-phishing-m365.html">[Analiza] Nowy phishing na Microsoft 365. Omijanie 2FA</a></h3>
+                    <p>Analiza laboratoryjna zaawansowanych ataków typu AiTM. Zobacz, jak oszuści kradną ciasteczka sesyjne i jak się przed tym bronić...</p>
+                </div>
 
-            <div class="post-card">
-                <span class="date">05 lipca 2026</span>
-                <h3><a href="analiza-toksyczne-paczki.html">[Analiza] Toksyczne paczki spoza UE. Jak oszuści wykorzystują przepisy celne?</a></h3>
-                <p>Analiza laboratoryjna nowej fali oszustw SMS-owych. Rozkładamy mechanizm smishingu na czynniki pierwsze i sprawdzamy, jak namierzyć sprawców...</p>
-            </div>
-        </section>
+                <div class="post-card">
+                    <span class="date">05 lipca 2026</span>
+                    <h3><a href="analiza-toksyczne-paczki.html">[Analiza] Toksyczne paczki spoza UE. Przepisy celne</a></h3>
+                    <p>Analiza laboratoryjna fali oszustw SMS-owych. Rozkładamy mechanizm smishingu na czynniki pierwsze i sprawdzamy, jak namierzyć sprawców...</p>
+                </div>
+            </section>
+
+        </div> <!-- Koniec układu dwukolumnowego -->
     </main>
 
     <footer>
