@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Procedura] Analiza nagłówków e-mail | Chemik w Sieci</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        pre { background: #1e1e1e; padding: 15px; border-radius: 5px; border: 1px solid #333; overflow-x: auto; font-family: "Courier New", Courier, monospace; font-size: 0.9em; color: #a9ffb2; }
+        .important-note { border-left: 3px solid #ff3366; margin: 20px 0; padding: 10px 15px; color: #ff88a8; background: #1a1115; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Procedura] Czytanie z cyfrowych fusów: Jak analizować nagłówki e-mail i wykryć spoofing?</h1>
+        <span class="date">Opublikowano: 5 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>To, co widzisz po otwarciu wiadomości e-mail – pole "Od", "Do", temat i treść – to zaledwie wierzchołek góry lodowej. Przestępcy potrafią bez trudu sfałszować pole nadawcy (tzw. e-mail spoofing), sprawiając, że mail z losowego serwera w sieci będzie udawał wiadomość od Twojego prezesa, współpracownika lub zaufanego banku.</p> 
+        
+        <p>Aby poznać prawdę o pochodzeniu wiadomości, musimy zajrzeć w jej <strong>nagłówki (e-mail headers)</strong>. To cyfrowy paszport wiadomości, w którym zapisany jest każdy serwer, przez który przeszedł mail. Zapraszam do laboratorium na pierwszą procedurę techniczną.</p>
+
+        <h2>Krok 1: Jak wyciągnąć nagłówki wiadomości?</h2>
+        <p>Zanim zaczniemy analizę, musisz pobrać tzw. surową treść wiadomości (raw source). W zależności od Twojego klienta poczty robi się to inaczej:</p>
+        <ul>
+            <li><strong>Gmail:</strong> Otwórz maila, kliknij ikonę trzech kropek obok przycisku odpowiedzi i wybierz <strong>"Pokaż oryginał"</strong>.</li>
+            <li><strong>Outlook:</strong> Otwórz wiadomość w osobnym oknie, przejdź do: Plik -> Właściwości -> Nagłówki internetowe.</li>
+            <li><strong>Thunderbird:</strong> Otwórz maila i użyj skrótu klawiszowego <code>Ctrl + U</code>.</li>
+        </ul>
+
+        <h2>Krok 2: Kluczowe linie w nagłówkach – na co patrzeć?</h2>
+        <p>Surowy nagłówek to ściana tekstu, która potrafi przerazić. Pokażę Ci jednak trzy najważniejsze sekcje, w których ukryta jest prawda.</p>
+
+        <h3>1. Ścieżka serwerów (Linie "Received:")</h3>
+        <p>Te linie czytamy <strong>od dołu do góry</strong>. Najniższa linia <code>Received:</code> to serwer, z którego mail fizycznie wystartował. Każda wyższa linia to kolejny serwer przekazujący wiadomość dalej, aż do Twojej skrzynki.</p>
+        
+        <p><strong>Przykład toksycznego nagłówka:</strong></p>
+        <pre>Received: from badhacker-server.com (unknown [185.234.12.5])
+    by twój-serwer-poczty.pl with ESMTPS ...
+    for &lt;ty@twojadomena.pl&gt;; Sun, 05 Jul 2026 ...
+From: "Prezes Firmy" &lt;prezes@twojadomena.pl&gt;</pre>
+        
+        <p>Co tu widzimy? W polu <code>From</code> wyświetla się adres Twojego prezesa, ale linia <code>Received</code> bezlitośnie obnaża oszusta – mail przyszedł z adresu IP <code>185.234.12.5</code> należącego do <code>badhacker-server.com</code>. Klasyczny spoofing.</p>
+
+        <h3>2. Filtry uwierzytelniające (SPF, DKIM, DMARC)</h3>
+        <p>Współczesne serwery pocztowe automatycznie badają wiarygodność nadawcy. Wyniki tych testów znajdziesz w linii <code>Authentication-Results</code>. Szukaj w niej następujących statusów:</p>
+        <ul>
+            <li><strong>SPF (Sender Policy Framework):</strong> Sprawdza, czy IP serwera wysyłającego ma autoryzację do wysyłki maili z danej domeny. Szukaj statusu <code>spf=pass</code> (bezpiecznie) lub <code>spf=fail</code> (niebezpiecznie).</li>
+            <li><strong>DKIM (DomainKeys Identified Mail):</strong> Cyfrowy podpis wiadomości gwarantujący, że treść nie została zmodyfikowana w locie. Pożądany status to <code>dkim=pass</code>.</li>
+            <li><strong>DMARC:</strong> Instrukcja dla serwera, co zrobić, jeśli SPF lub DKIM zawiodą. Status <code>dmarc=pass</code> oznacza pełną zgodność zabezpieczeń.</li>
+        </ul>
+
+        <div class="important-note">
+            <strong>Wskazówka analityka:</strong> Jeśli w nagłówku widzisz wpis <code>spf=fail</code> oraz <code>dmarc=fail</code>, a mimo to mail trafił do Twojej skrzynki odbiorczej (a nie do spamu), oznacza to, że administrator Twojej poczty zbyt łagodnie skonfigurował filtry bezpieczeństwa.
+        </div>
+
+        <h2>Narzędzia wspomagające (Gdy nie chcesz czytać kodu)</h2>
+        <p>Jeśli analiza surowego tekstu jest dla Ciebie zbyt uciążliwa, możesz skopiować całą zawartość nagłówka i wkleić ją do darmowych, bezpiecznych analizatorów online, które rozbiją te dane na czytelne tabele:</p>
+        <ul>
+            <li><strong>Google Admin Toolbox - Messageheader:</strong> Narzędzie od Google, idealne do analizy opóźnień i tras maili.</li>
+            <li><strong>MXToolbox Email Header Analyzer:</strong> Genialne narzędzie, które od razu na czerwono zaznaczy Ci niepoprawne wpisy SPF/DKIM oraz sprawdzi, czy IP nadawcy nie znajduje się na czarnych listach (RBL).</li>
+        </ul>
+
+        <h2>Zadanie domowe w Twoim laboratorium</h2>
+        <p>Wejdź dzisiaj na swoją skrzynkę mailową, znajdź jakikolwiek newsletter lub powiadomienie (np. z GitHubu czy banku), wyciągnij nagłówek i spróbuj odnaleźć w nim linię <code>Authentication-Results</code>. Zobacz, jak wyglądają poprawne, zielone statusy bezpieczeństwa, aby w przyszłości bez trudu wyłapać te anomalne i toksyczne.</p>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemik.w.sieci@proton.me</p>
+    </footer>
+
+</body>
+</html>
