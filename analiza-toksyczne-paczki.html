@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Analiza] Toksyczne paczki spoza UE | Chemik w Sieci</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        blockquote { border-left: 3px solid #ff3366; margin: 20px 0; padding: 10px 15px; color: #ff88a8; background: #1a1115; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Analiza] Toksyczne paczki spoza UE. Jak oszuści wykorzystują przepisy celne?</h1>
+        <span class="date">Opublikowano: 5 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>Zmiany w przepisach celnych dotyczących paczek spoza Unii Europejskiej (jak zniesienie zwolnień z cła dla drobnych przesyłek) to dla przeciętnego obywatela spore zamieszanie. Dla cyberprzestępców to jednak idealne środowisko do polowania. Policja alarmuje o masowej fali fałszywych wiadomości SMS (smishing).</p> 
+        
+        <p>Wchodzimy do laboratorium, aby rozłożyć to zagrożenie na czynniki pierwsze i sprawdzić, jakie ślady zostawiają po sobie sprawcy.</p>
+
+        <h2>Anatomia Ataku: Jak działa cyfrowa toksyna?</h2>
+        <p>Scenariusz jest prosty i powtarzalny. Potencjalna ofiara otrzymuje na swój telefon wiadomość SMS o zbliżonej treści:</p>
+
+        <blockquote>
+            "Twoja paczka spoza UE została zatrzymana przez służby celne z powodu braku opłaty celnej (np. 4,50 PLN). Prosimy o uregulowanie należności w ciągu 24h pod adresem: [falszywy-link-kuriera.pl]"
+        </blockquote>
+
+        <p>Przestępcy precyzyjnie miksują tutaj dwa czynniki psychologiczne:</p>
+        <ul>
+            <li><strong>Niską kwotę:</strong> Kilka złotych nie budzi podejrzeń. Ofiara myśli: <em>"Zapłacę i będę mieć spokój"</em>.</li>
+            <li><strong>Presję czasu:</strong> Limit 24 godzin wyłącza racjonalne myślenie i zmusza do natychmiastowego działania.</li>
+        </ul>
+
+        <h2>Kącik Śledczy: Idziemy po śladach przestępców</h2>
+        <p>Gdy link z takiego SMS-a trafi do mojego laboratorium, rozpoczynam procedurę analizy śladów (Threat Intelligence i OSINT). Co możemy ustalić, przyglądając się bliżej działaniom oszustów?</p>
+
+        <h3>1. Analiza domeny (Wiek i rejestracja)</h3>
+        <p>Oficjalne serwisy kurierskie działają na domenach z wieloletnią historią. Kiedy sprawdzamy podejrzany link w bazie <strong>WHOIS</strong>, prawda szybko wychodzi na jaw. Oszuści rejestrują domeny masowo – często zaledwie kilka godzin przed wysyłką SMS-ów. Wykorzystują do tego zagranicznych rejestratorów oraz usługi ukrywania danych, jednak sam skrajnie młody wiek domeny jest już jednoznacznym dowodem na oszustwo.</p>
+
+        <h3>2. Fałszywa bramka płatności (Wychwytywanie serwera C2)</h3>
+        <p>Link nie prowadzi do prawdziwego operatora płatności, lecz do perfekcyjnie sklonowanej strony, która udaje PayU, Przelewy24 lub panel logowania do konkretnego banku. Po wpisaniu tam danych logowania lub kodu BLIK, skrypt w tle natychmiast przesyła je na serwer zarządzający przestępców (Command & Control - C2).</p>
+
+        <h3>3. Wypłata środków</h3>
+        <p>Oszuści nie czekają. Gdy tylko otrzymają kod BLIK, ich wspólnicy (tzw. "muły finansowe") natychmiast wypłacają gotówkę w bankomacie na drugim końcu kraju lub środki są błyskawicznie transferowane na giełdy kryptowalut bez weryfikacji KYC (Know Your Customer). To sprawia, że czas reakcji ofiary ma kluczowe znaczenie.</p>
+
+        <h2>Antidotum: Jak zneutralizować zagrożenie?</h2>
+        <p>Aby nie dać się zainfekować tym oszustwem, stosuj proste zasady cyfrowej higieny:</p>
+        <ul>
+            <li><strong>Zasada zero zaufania dla linków SMS:</strong> Żadna firma kurierska ani urząd celny nie przesyła linków do bezpośrednich dopłat w wiadomościach SMS.</li>
+            <li><strong>Samodzielna weryfikacja:</strong> Jeśli naprawdę czekasz na paczkę, wejdź na oficjalną stronę przewoźnika, skopiuj numer przesyłki i wklej go w pole śledzenia ręcznie.</li>
+            <li><strong>Zgłoś próbkę do analizy:</strong> Podejrzanego SMS-a możesz przekazać bezpłatnie do CERT Polska na numer <strong>8080</strong>. W ten sposób pomagasz zablokować złośliwą domenę dla innych.</li>
+        </ul>
+
+        <h2>Co zrobić po "zatruciu"? (Procedura ratunkowa)</h2>
+        <p>Jeśli zdarzyło Ci się kliknąć i wprowadzić dane na fałszywej stronie:</p>
+        <ol>
+            <li><strong>Natychmiast skontaktuj się z bankiem</strong> z innego urządzenia (lub dzwoniąc na oficjalną infolinię). Zablokuj karty i dostęp do bankowości.</li>
+            <li><strong>Zmień hasła</strong> do kluczowych kont (mail, social media), jeśli były podobne do hasła bankowego.</li>
+            <li><strong>Zgłoś sprawę na Policję.</strong> Zabezpiecz zrzuty ekranu fałszywego SMS-a oraz historię transakcji – to kluczowe dowody w śledztwie.</li>
+        </ol>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemikwsieci[at]proton.me</p>
+    </footer>
+
+</body>
+</html>
