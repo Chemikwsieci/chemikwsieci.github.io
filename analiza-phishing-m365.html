@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Analiza] Nowy phishing na Microsoft 365 | Chemik w Sieci</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        blockquote { border-left: 3px solid #ff3366; margin: 20px 0; padding: 10px 15px; color: #ff88a8; background: #1a1115; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Analiza] Nowy phishing przejmuje konta Microsoft 365. Uwierzytelnianie dwuskładnikowe już nie wystarcza?</h1>
+        <span class="date">Opublikowano: 5 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>Przez lata powtarzano nam: "Włącz 2FA (dwuskładnikowe uwierzytelnianie), a będziesz bezpieczny". Niestety, cyberprzestępcy stworzyli nową mutację cyfrowej toksyny. Eksperci alarmują o zaawansowanych kampaniach phishingowych wymierzonych w użytkowników Microsoft 365, które z łatwością omijają tradycyjne zabezpieczenia 2FA.</p> 
+        
+        <p>Wchodzimy do cyfrowego laboratorium, aby zbadać mechanizm ataku typu <strong>AiTM (Adversary-in-the-Middle)</strong> i sprawdzić, jak obronić przed nim firmową infrastrukturę.</p>
+
+        <h2>Anatomia Ataku: Jak działa cyfrowa toksyna AiTM?</h2>
+        <p>W tradycyjnym phishingu oszuści po prostu kradli hasło. Jeśli miałeś włączone 2FA, ich plany paliły na panewce. Nowa metoda działa zupełnie inaczej – przestępca nie stoi za fałszywą stroną, ale staje <strong>pomiędzy</strong> Tobą a prawdziwym serwerem Microsoftu.</p>
+
+        <p>Scenariusz wygląda następująco:</p>
+        <ol>
+            <li>Ofiara otrzymuje maila (np. o rzekomej konieczności aktualizacji haseł lub ważnej fakturze w chmurze) i klika w link.</li>
+            <li>Trafia na serwer proxy kontrolowany przez oszusta, który wygląda 1:1 jak panel logowania Microsoft 365.</li>
+            <li>Ofiara wpisuje login i hasło – serwer oszusta natychmiast przekazuje je do <strong>prawdziwego</strong> serwera Microsoftu.</li>
+            <li>Microsoft widzi próbę logowania i wysyła do ofiary żądanie 2FA (kod SMS lub powiadomienie w aplikacji). Ofiara przepisuje kod na fałszywej stronie, a serwer oszusta natychmiast przesyła go do Microsoftu.</li>
+        </ol>
+
+        <h2>Kącik Śledczy: Co naprawdę kradną przestępcy?</h2>
+        <p>Najciekawszy i najbardziej toksyczny moment następuje na samym końcu. Gdy Microsoft uznaje logowanie za poprawne, generuje tzw. <strong>ciasteczko sesyjne (session cookie)</strong>. To cyfrowa przepustka, dzięki której Twój komputer pamięta, że jesteś zalogowany i nie pyta Cię o hasło przez kolejne dni.</p>
+        
+        <p>Ponieważ serwer oszusta pośredniczył w tej komunikacji, przechwytuje to ciasteczko. Przestępca wkleja je do swojej przeglądarki i w tym samym momencie <strong>uzyskuje pełen dostęp do Twojej skrzynki e-mail oraz plików w chmurze – bez znajomości Twojego hasła i bez konieczności ponownego przechodzenia przez 2FA</strong>.</p>
+
+        <h2>Antidotum: Jak zneutralizować zagrożenie?</h2>
+        <p>Skoro tradycyjne kody SMS i aplikacje uwierzytelniające zawodzą w starciu z AiTM, musimy sięgnąć po silniejsze odtrutki:</p>
+        <ul>
+            <li><strong>Klucze sprzętowe FIDO2 (np. YubiKey):</strong> To obecnie najskuteczniejsza ochrona. Klucz sprzętowy weryfikuje adres URL w przeglądarce. Jeśli wykryje, że domena w pasku adresu to fałszywka oszusta, po prostu odmówi wysłania danych uwierzytelniających.</li>
+            <li><strong>Logowanie bezhasłowe (Passkeys) lub Phishing-Resistant MFA:</strong> Wdrażanie w firmach metod logowania odpornych na phishing, które są ściśle powiązane z konkretną domeną internetową.</li>
+            <li><strong>Dokładna weryfikacja URL:</strong> Zanim wpiszesz dane logowania, spójrz na pasek adresu. Oszuści używają sprytnych literówek w domenach (np. <code>rnicrosoft.com</code> zamiast <code>microsoft.com</code>).</li>
+        </ul>
+
+        <h2>Co zrobić po "zatruciu"? (Procedura ratunkowa)</h2>
+        <p>Jeśli podejrzewasz, że Twoje ciasteczko sesyjne zostało skradzione:</p>
+        <ol>
+            <li><strong>Wyloguj wszystkie sesje:</strong> W ustawieniach konta Microsoft (My Sign-ins) wybierz opcję "Wyloguj się ze wszystkich miejsc". To natychmiast unieważni skradzione przez oszusta ciasteczko.</li>
+            <li><strong>Powiadom dział IT / Administratora:</strong> W środowisku firmowym administrator musi natychmiast sprawdzić logi logowania pod kątem podejrzanych adresów IP oraz sprawdzić, czy na koncie nie ustawiono nowych reguł przekierowania poczty.</li>
+        </ol>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemikwsieci@proton.me</p>
+    </footer>
+
+</body>
+</html>
