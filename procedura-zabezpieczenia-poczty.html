@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Procedura] Konfiguracja SPF, DKIM i DMARC | Chemik w Sieci</title>
+    <!-- Kod analityki Umami -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        pre { background: #1e1e1e; padding: 15px; border-radius: 5px; border: 1px solid #333; overflow-x: auto; font-family: "Courier New", Courier, monospace; font-size: 0.9em; color: #a9ffb2; }
+        .important-note { border-left: 3px solid #00ffcc; margin: 20px 0; padding: 10px 15px; color: #a9ffb2; background: #111a17; border-radius: 0 5px 5px 0; }
+        .alert-note { border-left: 3px solid #ff3366; margin: 20px 0; padding: 10px 15px; color: #ff88a8; background: #1a1115; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Procedura] Receptura na bezpieczną domenę: Zaawansowana konfiguracja SPF, DKIM i DMARC</h1>
+        <span class="date">Opublikowano: 5 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>W poprzedniej procedurze badaliśmy nagłówki e-mail, aby wykryć sfałszowane wiadomości. Dziś stajemy po drugiej stronie barykady. Załóżmy, że posiadasz własną domenę firmową lub osobistą. Czy wiesz, że bez odpowiednich zabezpieczeń każdy oszust w sieci może wysłać maila, wpisując w polu nadawcy Twój adres, i zepsuć Twoją reputację?</p> 
+        
+        <p>Czas zabezpieczyć Twój serwer pocztowy. W dzisiejszej zaawansowanej procedurze laboratoryjnej wdrożymy potężną triadę obronną: **SPF, DKIM oraz DMARC**. Wszystkie te mechanizmy konfiguruje się jako specjalne wpisy w strefie DNS Twojej domeny.</p>
+
+        <h2>1. SPF (Sender Policy Framework) – Cyfrowa lista gości</h2>
+        <p>SPF to prosty mechanizm, w którym mówisz światu: *"Oto lista adresów IP i serwerów, które mają moje oficjalne pozwolenie na wysyłanie maili z mojej domeny"*. Jeśli serwer odbiorcy odbierze maila z Twojej domeny, ale z adresu IP spoza tej listy – podniesie alarm.</p>
+        
+        <p><strong>Wzorcowy wpis SPF (Typ rekordu: TXT, nazwa: @ lub pusta):</strong></p>
+        <pre>v=spf1 include:_spf.google.com include:sendgrid.net -all</pre>
+        
+        <p><strong>Rozwój składników:</strong></p>
+        <ul>
+            <li><code>v=spf1</code> – Definiuje wersję protokołu.</li>
+            <li><code>include:_spf.google.com</code> – Dopisuje serwery Google Workspace (jeśli tam masz pocztę).</li>
+            <li><code>include:sendgrid.net</code> – Dopisuje zewnętrzną usługę do wysyłki np. newsletterów.</li>
+            <li><code>-all</code> – **Kluczowy element (Hard Fail).** Oznacza: *"Każdy serwer spoza tej listy ma zostać bezwzględnie odrzucony"*. Unikaj miękkiego filtra <code>~all</code> (Soft Fail), który jest zbyt pobłażliwy dla oszustów.</li>
+        </ul>
+
+        <h2>2. DKIM (DomainKeys Identified Mail) – Cyfrowy lak na liście</h2>
+        <p>Sam SPF nie chroni przed zmodyfikowaniem treści wiadomości w locie. Do tego potrzebujemy kryptografii. DKIM podpisuje każdego wychodzącego maila **kluczem prywatnym** serwera. Serwer odbiorcy pobiera Twój **klucz publiczny** z DNS-u i weryfikuje podpis.</p>
+        
+        <p>Wpis generuje się bezpośrednio w panelu dostawcy poczty (np. Microsoft 365 lub Google Workspace). Otrzymasz tam unikalny rekord, który wygląda następująco:</p>
+        <p><strong>Przykładowy wpis DKIM (Typ rekordu: TXT, nazwa: google._domainkey):</strong></p>
+        <pre>v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0...[długi ciąg klucza]</pre>
+        <p>Prawidłowo skonfigurowany DKIM gwarantuje, że mail faktycznie pochodzi z Twojego systemu pocztowego i nikt nie zmienił ani jednej litery w jego treści podczas transmisji.</p>
+
+        <h2>3. DMARC – Żelazna instrukcja dla odbiorców</h2>
+        <p>DMARC to szef całej operacji. Łączy SPF oraz DKIM i mówi serwerom odbierającym pocztę, **co dokładnie mają zrobić**, jeśli któryś z powyższych filtrów zawiedzie. Bez DMARC serwery odbiorców często ignorują błędy SPF/DKIM i przepuszczają fałszywki do skrzynki.</p>
+        
+        <p>DMARC wdraża się stopniowo, przechodząc przez trzy polityki bezpieczeństwa (flaga <code>p=</code>):</p>
+        <ol>
+            <li><code>p=none</code> – Tryb monitorowania. Serwery przyjmują maile, ale wysyłają Ci raporty o błędach.</li>
+            <li><code>p=quarantine</code> – Podejrzane maile trafiają bezpośrednio do spamu odbiorcy.</li>
+            <li><code>p=reject</code> – **Cel ostateczny.** Fałszywe maile są całkowicie kasowane na poziomie serwera, zanim odbiorca w ogóle się o nich dowie.</li>
+        </ol>
+
+        <p><strong>Zaawansowany wpis DMARC (Typ rekordu: TXT, nazwa: _dmarc):</strong></p>
+        <pre>v=DMARC1; p=reject; pct=100; rua=mailto:dmarc-reports@twojadomena.pl</pre>
+        
+        <p><strong>Rozwój składników:</strong></p>
+        <ul>
+            <li><code>p=reject</code> – Nakaz natychmiastowego odrzucania oszukańczych maili.</li>
+            <li><code>pct=100</code> – Polityka dotyczy 100% przesyłanych wiadomości.</li>
+            <li><code>rua=mailto:...</code> – Adres e-mail, na który serwery z całego świata (np. Gmail, Yahoo) będą przysyłać codzienne, zbiorcze raporty XML o stanie bezpieczeństwa Twojej domeny.</li>
+        </ul>
+
+        <div class="alert-note">
+            <strong>Ostrzeżenie laboratoryjne:</strong> Nigdy nie wdrażaj od razu polityki <code>p=reject</code>, jeśli nie masz 100% pewności, że wszystkie Twoje usługi (CRMy, systemy fakturowe, newslettery) zostały poprawnie dopisane do rekordu SPF i DKIM. W przeciwnym razie odetniesz od dostarczania wiadomości własne legalne systemy!
+        </div>
+
+        <h2>Weryfikacja – jak sprawdzić czy tarcza działa?</h2>
+        <p>Po dodaniu wpisów w DNS (co może potrwać do kilku godzin ze względu na propagację), wyślij testowego maila z chronionej domeny na darmowe narzędzie weryfikacyjne online: <strong>Mail-tester.com</strong>. Usługa oceni Twoje konfiguracje i wystawi ocenę w skali 1-10. Twój cel to czyste 10/10.</p>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemik.w.sieci@proton.me</p>
+    </footer>
+
+</body>
+</html>
