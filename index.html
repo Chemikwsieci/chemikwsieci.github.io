@@ -5,125 +5,258 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemik w Sieci | Cyfrowe Laboratorium Bezpieczeństwa</title>
     <!-- Kod analityki Umami -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="f9c1e561-0286-4156-b648-e8aa8847e597"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 1000px; margin: 0 auto; padding: 20px; }
-        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; text-align: center; }
-        h1 { color: #00ffcc; margin: 0; font-size: 2.5em; }
-        h2 { color: #00ffcc; margin-top: 0; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        h3 { margin: 0 0 10px 0; font-size: 1.15em; }
-        p { color: #b0b0b0; }
-        a { color: #00ffcc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .tagline { font-style: italic; color: #888; }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #cdd6f4; 
+            background-color: #0b0f19; 
+            max-width: 1050px; 
+            margin: 0 auto; 
+            padding: 30px 20px; 
+        }
+        header { 
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+            border-bottom: 3px solid #00ffcc; 
+            padding: 40px 20px; 
+            margin-bottom: 40px; 
+            text-align: center; 
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        h1 { 
+            color: #00ffcc; 
+            margin: 0; 
+            font-size: 2.8em; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            font-weight: 800;
+            cursor: default;
+            display: inline-block;
+        }
+        h2 { font-size: 1.6em; margin-top: 0; padding-bottom: 12px; font-weight: 700; letter-spacing: 0.5px; }
+        h3 { margin: 0 0 10px 0; font-size: 1.2em; font-weight: 600; }
+        p { color: #9ca3af; margin: 0 0 15px 0; }
+        a { color: #00ffcc; text-decoration: none; transition: color 0.2s ease; }
+        a:hover { color: #8a4fff; text-decoration: underline; }
         
-        /* Kontener dla układu dwukolumnowego */
-        .columns-container { display: flex; gap: 30px; margin-top: 40px; }
-        .column { flex: 1; min-width: 280px; }
+        /* Styl dla animowanego podtytułu */
+        .tagline { 
+            font-family: "Courier New", Courier, monospace;
+            color: #9ca3af; 
+            font-size: 1.1em; 
+            margin-top: 10px; 
+            min-height: 1.6em;
+        }
         
-        .post-card { background: #1c1c1c; border-left: 4px solid #00ffcc; padding: 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0; }
-        .date { color: #666; font-size: 0.85em; display: block; margin-bottom: 5px; }
-        footer { margin-top: 60px; text-align: center; color: #666; font-size: 0.9em; border-top: 1px solid #222; padding-top: 20px; }
+        /* Sekcja O Mnie */
+        .intro-box { 
+            background-color: #111827; 
+            border: 1px solid #1f2937; 
+            border-radius: 8px; 
+            padding: 25px; 
+            margin-bottom: 40px; 
+        }
+        .intro-box h2 { color: #00ffcc; border-bottom: 1px solid #1f2937; }
+        .intro-box p:last-child { margin-bottom: 0; }
 
-        /* RWD: Na telefonach kolumny ułożą się w pionie */
-        @media (max-width: 768px) {
+        /* Kontener dla układu dwukolumnowego */
+        .columns-container { display: flex; gap: 30px; }
+        .column { flex: 1; min-width: 300px; }
+        
+        .column-left h2 { color: #8a4fff; border-bottom: 2px solid #8a4fff; }
+        .column-right h2 { color: #00ffcc; border-bottom: 2px solid #00ffcc; }
+
+        /* Karty wpisów */
+        .post-card { 
+            background: #111827; 
+            padding: 22px; 
+            margin-bottom: 20px; 
+            border-radius: 6px; 
+            border: 1px solid #1f2937;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .post-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            border-color: #374151;
+        }
+        .column-left .post-card { border-left: 4px solid #8a4fff; }
+        .column-right .post-card { border-left: 4px solid #00ffcc; }
+        
+        .column-left .post-card h3 a { color: #e0d4ff; }
+        .column-right .post-card h3 a { color: #d4f7f2; }
+        .column-left .post-card h3 a:hover { color: #00ffcc; }
+        .column-right .post-card h3 a:hover { color: #8a4fff; }
+
+        .date { color: #6b7280; font-size: 0.85em; display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.5px; }
+        footer { margin-top: 60px; text-align: center; color: #4b5563; font-size: 0.9em; border-top: 1px solid #1f2937; padding-top: 25px; }
+
+        /* Responsywność */
+        @media (max-width: 800px) {
             .columns-container { flex-direction: column; }
+            body { padding: 15px 10px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Chemik w Sieci</h1>
-        <p class="tagline">Rozkładanie cyberzagrożeń na czynniki pierwsze. Cyfrowe odtrutki i OSINT.</p>
+        <h1 id="brand-title">Chemik w Sieci</h1>
+        <p class="tagline" id="scramble-text" data-text="Rozkładanie cyberzagrożeń na czynniki pierwsze. Cyfrowe odtrutki i OSINT."></p>
     </header>
 
     <main>
-        <section id="o-projekcie">
+        <section class="intro-box" id="o-projekcie">
             <h2>O laboratorium</h2>
             <p>W świecie realnym chemicy badają skład toksyn, tworzą na nie odtrutki i pomagają ustalić źródło skażenia. W świecie cyfrowym robię dokładnie to samo. Jestem aktywnym zawodowo ekspertem ds. cyberbezpieczeństwa. Z uwagi na charakter mojej pracy oraz bezpieczeństwo operacji, którymi się zajmuję, występuję tutaj inkognito – jako Chemik.</p>
             <p>Internet został zalany toksycznymi oszustwami. Na tym blogu rozkładam cyberataki na czynniki pierwsze, idę po śladach przestępców (OSINT) i dostarczam szybkie odtrutki w postaci wiedzy.</p>
         </section>
 
-        <!-- Początek układu dwukolumnowego -->
         <div class="columns-container">
             
             <!-- KOLUMNA LEWA: PROCEDURY -->
-            <section class="column" id="procedury">
+            <section class="column column-left" id="procedury">
                 <h2>Procedury laboratoryjne</h2>
-
-                <div class="post-card" style="border-left-color: #8a4fff;">
-                    <span class="date">08 lipca 2026</span>
-                    <h3><a href="procedura-bezpieczne-hasla.html">[Procedura] Śmierć tradycyjnych haseł: Nowe zasady NIST</a></h3>
-                    <p>Porzuć przestarzałe reguły pokroju P@55w0rd!. Dowiedz się, dlaczego długość ma większe znaczenie niż znaki specjalne i jak budować potężne, proste do zapamiętania frazy-hasła...</p>
-                </div>
                 
-                <div class="post-card" style="border-left-color: #8a4fff;">
-                    <span class="date">05 lipca 2026</span>
-                    <h3><a href="procedura-zabezpieczenia-poczty.html">[Procedura] Receptura na bezpieczną domenę: SPF, DKIM i DMARC</a></h3>
+                <div class="post-card">
+                    <span class="date">08 LIPCA 2026</span>
+                    <h3><a href="procedura-bezpieczne-hasla.html">[Procedura] Śmierć haseł: Nowe zasady NIST</a></h3>
+                    <p>Porzuć przestarzałe reguły pokroju P@55w0rd!. Dowiedz się, dlaczego długość ma większe znaczenie niż znaki specjalne i jak budować potężne frazy-hasła...</p>
+                </div>
+
+                <div class="post-card">
+                    <span class="date">05 LIPCA 2026</span>
+                    <h3><a href="procedura-zabezpieczenia-poczty.html">[Procedura] Receptura na domenę: SPF, DKIM i DMARC</a></h3>
                     <p>Zabezpiecz swoją domenę przed podszywaniem się. Zaawansowany przewodnik po wdrażaniu triady SPF, podpisów DKIM oraz żelaznych reguł DMARC...</p>
                 </div>
 
-                <div class="post-card" style="border-left-color: #8a4fff;">
-                    <span class="date">05 lipca 2026</span>
-                    <h3><a href="procedura-osint-metadane.html">[Procedura] Cyfrowy zwiad: Wyciąganie metadanych z plików za pomocą ExifTool</a></h3>
-                    <p>Odkryj ukrytą warstwę danych. Praktyczny poradnik OSINT pokazujący, jak wyciągać współrzędne GPS ze zdjęć i jak bezpiecznie czyścić te ślady...</p>
+                <div class="post-card">
+                    <span class="date">05 LIPCA 2026</span>
+                    <h3><a href="procedura-osint-metadane.html">[Procedura] Cyfrowy zwiad: Wyciąganie metadanych</a></h3>
+                    <p>Odkryj ukrytą warstwę danych. Praktyczny poradnik OSINT pokazujący, jak wyciągać współrzędne GPS ze zdjęć i jak bezpiecznie czyścić te ślady przed publikacją...</p>
                 </div>
 
-                <div class="post-card" style="border-left-color: #8a4fff;">
-                    <span class="date">05 lipca 2026</span>
-                    <h3><a href="procedura-naglowki-email.html">[Procedura] Czytanie z cyfrowych fusów: Analiza nagłówków e-mail</a></h3>
-                    <p>Praktyczny przewodnik po nagłówkach internetowych. Dowiedz się, jak krok po kroku czytać linie Received i weryfikować filtry SPF/DKIM...</p>
+                <div class="post-card">
+                    <span class="date">05 LIPCA 2026</span>
+                    <h3><a href="procedura-naglowki-email.html">[Procedura] Czytanie z fusów: Analiza nagłówków</a></h3>
+                    <p>Praktyczny przewodnik po nagłówkach internetowych. Dowiedz się, jak krok po kroku czytać linie Received, weryfikować filtry SPF/DKIM i ujawniać spoofing...</p>
                 </div>
             </section>
 
             <!-- KOLUMNA PRAWA: ANALIZY -->
-            <section class="column" id="artykuly">
+            <section class="column column-right" id="artykuly">
                 <h2>Analizy incydentów</h2>
+                
+                <div class="post-card">
+                    <span class="date">08 LIPCA 2026</span>
+                    <h3><a href="analiza-ransomware-ai-jadepuffer.html">[Analiza] Atak bez człowieka: Autonomiczny ransomware AI</a></h3>
+                    <p>Granica pękła. Badacze udokumentowali pierwszy w historii atak ransomware przeprowadzony w 100% przez agenta AI JadePuffer. Zobacz, jak model sam poprawiał błędy...</p>
+                </div>
 
                 <div class="post-card">
-                    <span class="date">08 lipca 2026</span>
-                    <h3><a href="analiza-ransomware-ai-jadepuffer.html">[Analiza] Atak bez człowieka: Autonomiczny ransomware AI JadePuffer</a></h3>
-                    <p>Granica pękła. Badacze udokumentowali pierwszy w historii atak ransomware przeprowadzony w 100% przez agenta AI. Zobacz, jak model LLM sam poprawiał swoje błędy w 31 sekund...</p>
-                </div>
-                
-                <div class="post-card">
-                    <span class="date">08 lipca 2026</span>
+                    <span class="date">08 LIPCA 2026</span>
                     <h3><a href="analiza-sfalszowane-wycieki.html">[Analiza] Wycieki danych, których nie było: Iluzja strachu</a></h3>
-                    <p>Oszuści coraz częściej wmawiają ofiarom, że ich konta zostały zhakowane, podając stare hasła z recyklingu. Zobacz, jak rozpoznać ten bezczelny blef i nie dać się zaszantażować...</p>
+                    <p>Oszuści coraz częściej wmawiają ofiarom, że ich konta zostały zhakowane, podając stare hasła z recyklingu. Zobacz, jak rozpoznnać ten bezczelny blef...</p>
                 </div>
-                
+
                 <div class="post-card">
-                    <span class="date">08 lipca 2026</span>
-                    <h3><a href="analiza-phishing-dpd.html">[Analiza] Oszustwo na DPD: Pułapka niepełnego adresu</a></h3>
+                    <span class="date">08 LIPCA 2026</span>
+                    <h3><a href="analiza-phishing-dpd.html">[Analiza] Oszustwo na DPD: Pułapka adresu</a></h3>
                     <p>Nowa fala smishingu uderza w Polaków. Fałszywe SMS-y od "DPD" informują o braku numeru domu i wyłudzają pełne dane kart płatniczych pod pretekstem małej dopłaty...</p>
                 </div>
-                
-                <div class="post-card">
-                    <span class="date">05 lipca 2026</span>
-                    <h3><a href="analiza-phishing-olx.html">[Analiza] Sprzedajesz na OLX? Uważaj na wiadomości na WhatsAppie</a></h3>
-                    <p>Analiza popularnego oszustwa wycelowanego w sprzedawców. Jak boty namierzają nowe oferty i dlaczego żądanie danych karty to pułapka...</p>
-                </div>
 
                 <div class="post-card">
-                    <span class="date">05 lipca 2026</span>
-                    <h3><a href="analiza-phishing-m365.html">[Analiza] Nowy phishing na Microsoft 365. Omijanie 2FA</a></h3>
-                    <p>Analiza laboratoryjna zaawansowanych ataków typu AiTM. Zobacz, jak oszuści kradną ciasteczka sesyjne i jak się przed tym bronić...</p>
-                </div>
-
-                <div class="post-card">
-                    <span class="date">05 lipca 2026</span>
-                    <h3><a href="analiza-toksyczne-paczki.html">[Analiza] Toksyczne paczki spoza UE. Przepisy celne</a></h3>
-                    <p>Analiza laboratoryjna fali oszustw SMS-owych. Rozkładamy mechanizm smishingu na czynniki pierwsze i sprawdzamy, jak namierzyć sprawców...</p>
+                    <span class="date">05 LIPCA 2026</span>
+                    <h3><a href="analiza-phishing-olx.html">[Analiza] Sprzedajesz na OLX? Uważaj na WhatsApp</a></h3>
+                    <p>Analiza popularnego oszustwa wycelowanego w sprzedawców na portalach ogłoszeniowych. Jak boty namierzają nowe ofertas i dlaczego żądanie danych karty to pułapka...</p>
                 </div>
             </section>
 
-        </div> <!-- Koniec układu dwukolumnowego -->
+        </div>
     </main>
 
     <footer>
         <p>© 2026 Chemik w Sieci. Kontakt: chemikwsieci[at]proton.me</p>
     </footer>
 
+    <!-- SKRYPT JS: EFEKTY CYFROWEGO LABORATORIUM -->
+    <script>
+        // 1. Efekt rozsypania i dekodowania tekstu (Scramble) dla taglinii
+        const chars = '!<>-_\\/[]{}—=+*^?#________';
+        const targetEl = document.getElementById('scramble-text');
+        const rawText = targetEl.getAttribute('data-text');
+        let frame = 0;
+        const queue = [];
+
+        for (let i = 0; i < rawText.length; i++) {
+            const from = '';
+            const to = rawText[i];
+            const start = Math.floor(Math.random() * 40);
+            const end = start + Math.floor(Math.random() * 40);
+            queue.push({ from, to, start, end, char: '' });
+        }
+
+        function updateScramble() {
+            let output = '';
+            let complete = 0;
+            for (let i = 0, n = queue.length; i < n; i++) {
+                let { from, to, start, end, char } = queue[i];
+                if (frame >= end) {
+                    complete++;
+                    output += to;
+                } else if (frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = chars[Math.floor(Math.random() * chars.length)];
+                        queue[i].char = char;
+                    }
+                    output += `<span style="color: #00ffcc;">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            targetEl.innerHTML = output;
+            if (complete < queue.length) {
+                frame++;
+                requestAnimationFrame(updateScramble);
+            }
+        }
+        
+        // Uruchomienie efektu dekodowania po załadowaniu strony
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(updateScramble, 300);
+        });
+
+        // 2. Glitch efekt po najechaniu myszką na główny tytuł
+        const brandTitle = document.getElementById('brand-title');
+        const originalTitle = brandTitle.innerText;
+        let glitchInterval = null;
+
+        brandTitle.addEventListener('mouseover', () => {
+            let count = 0;
+            glitchInterval = setInterval(() => {
+                brandTitle.innerText = originalTitle.split('').map((letter, index) => {
+                    if (Math.random() < 0.15 && letter !== ' ') {
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    }
+                    return letter;
+                }).join('');
+                count++;
+                if (count > 8) {
+                    clearInterval(glitchInterval);
+                    brandTitle.innerText = originalTitle;
+                }
+            }, 80);
+        });
+
+        brandTitle.addEventListener('mouseleave', () => {
+            clearInterval(glitchInterval);
+            brandTitle.innerText = originalTitle;
+        });
+    </script>
 </body>
 </html>
