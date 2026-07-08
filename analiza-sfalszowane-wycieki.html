@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Analiza] Wycieki danych, których nie było | Chemik w Sieci</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        .important-note { border-left: 3px solid #ff3366; margin: 20px 0; padding: 10px 15px; color: #ff88a8; background: #1a1115; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Analiza] Wycieki danych, których nie było. Jak oszuści terroryzują nas zmyślonymi zhakowaniami?</h1>
+        <span class="date">Opublikowano: 8 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>Otrzymujesz maila o dramatycznym tytule: <em>"Twoje konto zostało zhakowane, znamy Twoje hasło"</em> albo widzisz w mediach społecznościowych paniczne doniesienia o gigantycznej bazie danych rzekomo wykradzionej z popularnego polskiego portalu. Przestępcy żądają okupu lub nakazują natychmiastowe kliknięcie w link w celu "weryfikacji bezpieczeństwa". Czy rzeczywiście doszło do ataku? Często odpowiedź brzmi: nie. To iluzja stworzona przez socjotechników.</p> 
+        
+        <p>W dzisiejszej analizie rozkładamy na czynniki pierwsze zjawisko **sfałszowanych wycieków danych (fake data breaches)** – metody, w której strach przed kompromitacją paraliżuje logiczne myślenie ofiary.</p>
+
+        <h2>Recykling i blef: Skąd oszuści mają Twoje dane?</h2>
+        <p>Największą zagadką dla ofiary jest fakt, że oszust w mailu szantażującym potrafi podać jej **stare, ale prawdziwe hasło** lub numer PESEL. To buduje natychmiastowe poczucie, że przestępca rzeczywiście kontroluje nasz komputer.</p>
+        
+        <p>Prawda jest jednak znacznie bardziej prozaiczna. Przestępcy nie włamali się na Twoje konto dzisiaj. Wykorzystują oni tzw. **recykling danych**:</p>
+        <ul>
+            <li>Agregują stare, publicznie dostępne w sieci bazy danych z wycieków sprzed kilku lat (np. z dawnych forów internetowych czy sklepów online).</li>
+            <li>Łączą te historyczne dane (hasła, maile) z automatycznymi generatorami wiadomości.</li>
+            <li>Wysyłają masowy szantaż, licząc na to, że ofiara nadal używa tego samego hasła w innych miejscach i wpadnie w panikę.</li>
+        </ul>
+
+        <div class="important-note">
+            <strong>Zasada laboratoryjna:</strong> To, że ktoś zna Twoje dawne hasło, nie oznacza, że ma dostęp do Twojego obecnego konta bankowego czy skrzynki pocztowej. To czysty blef mający na celu wywołanie presji psychologicznej.
+        </div>
+
+        <h2>Sztuczne pompowanie paniki na forach</h2>
+        <p>Drugim wariantem tego oszustwa są fałszywe ogłoszenia na forach cyberprzestępczych. Oszust publikuje post, twierdząc, że posiada świeżą bazę danych 5 milionów Polaków z dużego banku czy portalu e-commerce. </p>
+        
+        <p>W rzeczywistości "próbka" (sample), którą udostępnia, to losowo wygenerowane numery telefonów połączone z losowymi imionami lub wymieszane stare dane z innych krajów. Celem oszusta jest zmuszenie ludzi do masowego pobierania złośliwych plików ("sprawdź czy tam jesteś") lub wyłudzenie pieniędzy od innych przestępców na czarnym rynku.</p>
+
+        <h2>Antidotum: Jak sprawdzić, czy wyciek jest prawdziwy?</h2>
+        <p>Kiedy widzisz informację o rzekomym wycieku Twoich danych, zastosuj poniższą procedurę weryfikacyjną:</p>
+        <ul>
+            <li><strong>Użyj zaufanych testerów:</strong> Najlepszym i najbezpieczniejszym miejscem do weryfikacji jest serwis <code>HaveIBeenPwned.com</code> (prowadzony przez eksperta Troy'a Hunt'a) lub rządowy polski panel <code>bezpiecznedane.gov.pl</code>. Wpisz tam swój mail lub PESEL, by sprawdzić, czy i w jakich *rzeczywistych* bazach historycznych się znajduje.</li>
+            <li><strong>Ignoruj maile szantażujące (Sextortion/Extortion):</strong> Jeśli dostaniesz maila z żądaniem bitcoina w zamian za nieujawnienie Twoich sekretów – usuń go. To masowy spam wysyłany do milionów ludzi jednocześnie.</li>
+            <li><strong>Higiena haseł:</strong> Najlepszym odtrutką na wycieki (prawdziwe i fałszywe) jest używanie menedżera haseł oraz zasada: **jedno konto = jedno unikalne, skomplikowane hasło**. Nawet jeśli baza z jednego sklepu wycieknie, reszta Twoich kont pozostanie bezpieczna.</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemik.w.sieci@proton.me</p>
+    </footer>
+
+</body>
+</html>
