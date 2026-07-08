@@ -17,17 +17,35 @@
             margin: 0 auto; 
             padding: 30px 20px; 
         }
-        header { 
-            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        header {
+            background: #111827; /* Ciemne tło startowe */
             border-bottom: 3px solid #00ffcc; 
             padding: 40px 20px; 
             margin-bottom: 40px; 
             text-align: center; 
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            position: relative;
+            position: relative; /* Kluczowe dla pozycjonowania tła */
             overflow: hidden;
         }
+        
+        /* Styl dla płótna Matrix, który wrzuca go pod tekst */
+        #matrix-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Pod tekstami */
+            opacity: 0.35; /* Subtelne tło, żeby nie raziło w oczy i nie zasłaniało liter */
+        }
+
+        /* Upewniamy się, że teksty są NAD matrixem */
+        #brand-title, .tagline {
+            position: relative;
+            z-index: 2;
+        }
+
         h1 { 
             color: #00ffcc; 
             margin: 0; 
@@ -105,10 +123,12 @@
 </head>
 <body>
 
-    <header>
+  <header>
+        <canvas id="matrix-canvas"></canvas>
         <h1 id="brand-title">Chemik w Sieci</h1>
         <p class="tagline" id="scramble-text" data-text="Rozkładanie cyberzagrożeń na czynniki pierwsze. Cyfrowe odtrutki i OSINT."></p>
     </header>
+
 
     <main>
         <section class="intro-box" id="o-projekcie">
@@ -198,34 +218,39 @@
     </footer>
 
     <!-- SKRYPT JS: EFEKTY CYFROWEGO LABORATORIUM -->
-    <script>
-        // 1. Efekt rozsypania i dekodowania tekstu (Scramble) dla taglinii
+        <script>
+        // WSPOŁNE ZASOBY ZNAKÓW DLA EFEKTÓW HAKERSKICH
         const chars = '!<>-_\\/[]{}—=+*^?#________';
+        const matrixChars = '0110100101100110X#$@%&*()-=+[]{}<>?;:';
+
+        // =====================================================================
+        // 1. EFEKT ROZSYPYWANIA I DEKODOWANIA TEKSTU (SCRAMBLE)
+        // =====================================================================
         const targetEl = document.getElementById('scramble-text');
         const rawText = targetEl.getAttribute('data-text');
-        let frame = 0;
-        const queue = [];
+        let scrambleFrame = 0;
+        const scrambleQueue = [];
 
         for (let i = 0; i < rawText.length; i++) {
             const from = '';
             const to = rawText[i];
             const start = Math.floor(Math.random() * 40);
             const end = start + Math.floor(Math.random() * 40);
-            queue.push({ from, to, start, end, char: '' });
+            scrambleQueue.push({ from, to, start, end, char: '' });
         }
 
         function updateScramble() {
             let output = '';
             let complete = 0;
-            for (let i = 0, n = queue.length; i < n; i++) {
-                let { from, to, start, end, char } = queue[i];
-                if (frame >= end) {
+            for (let i = 0, n = scrambleQueue.length; i < n; i++) {
+                let { from, to, start, end, char } = scrambleQueue[i];
+                if (scrambleFrame >= end) {
                     complete++;
                     output += to;
-                } else if (frame >= start) {
+                } else if (scrambleFrame >= start) {
                     if (!char || Math.random() < 0.28) {
                         char = chars[Math.floor(Math.random() * chars.length)];
-                        queue[i].char = char;
+                        scrambleQueue[i].char = char;
                     }
                     output += `<span style="color: #00ffcc;">${char}</span>`;
                 } else {
@@ -233,18 +258,15 @@
                 }
             }
             targetEl.innerHTML = output;
-            if (complete < queue.length) {
-                frame++;
+            if (complete < scrambleQueue.length) {
+                scrambleFrame++;
                 requestAnimationFrame(updateScramble);
             }
         }
-        
-        // Uruchomienie efektu dekodowania po załadowaniu strony
-        window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(updateScramble, 300);
-        });
 
-        // 2. Glitch efekt po najechaniu myszką na główny tytuł
+        // =====================================================================
+        // 2. GLITCH EFEKT DLA TYTUŁU GŁÓWNEGO (NAJECHANIE MYSZKĄ)
+        // =====================================================================
         const brandTitle = document.getElementById('brand-title');
         const originalTitle = brandTitle.innerText;
         let glitchInterval = null;
@@ -252,7 +274,7 @@
         brandTitle.addEventListener('mouseover', () => {
             let count = 0;
             glitchInterval = setInterval(() => {
-                brandTitle.innerText = originalTitle.split('').map((letter, index) => {
+                brandTitle.innerText = originalTitle.split('').map((letter) => {
                     if (Math.random() < 0.15 && letter !== ' ') {
                         return chars[Math.floor(Math.random() * chars.length)];
                     }
@@ -270,6 +292,61 @@
             clearInterval(glitchInterval);
             brandTitle.innerText = originalTitle;
         });
+
+        // =====================================================================
+        // 3. EFEKT MATRIX DIGITAL RAIN (DESZCZ KODU W TLE NAGŁÓWKA)
+        // =====================================================================
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        const fontSize = 14;
+        let drops = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            
+            // Ponowne przeliczenie kolumn po zmianie rozmiaru okna
+            const columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let x = 0; x < columns; x++) {
+                drops[x] = Math.random() * -100;
+            }
+        }
+
+        function drawMatrix() {
+            // Efekt smugi - nakładanie półprzezroczystego tła pasującego do nagłówka
+            ctx.fillStyle = 'rgba(17, 24, 39, 0.08)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Kolor i czcionka deszczu
+            ctx.fillStyle = '#00ffcc';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+                
+                // Rysowanie pojedynczego znaku w kolumnie
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset kropli na górę, gdy minie dno nagłówka
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        // INICJALIZACJA SYSTEMÓW PO ZAŁADOWANIU STRONY
+        window.addEventListener('DOMContentLoaded', () => {
+            // Uruchomienie deszczu Matrix
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            setInterval(drawMatrix, 33); // ~30 klatek na sekundę
+
+            // Uruchomienie dekodowania tekstu z lekkim opóźnieniem
+            setTimeout(updateScramble, 300);
+        });
     </script>
+
 </body>
 </html>
