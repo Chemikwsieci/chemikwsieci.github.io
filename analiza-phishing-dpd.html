@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Analiza] Oszustwo na DPD: Pułapka niepełnego adresu | Chemik w Sieci</title>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        .important-note { border-left: 3px solid #ff3366; margin: 20px 0; padding: 10px 15px; color: #ff88a8; background: #1a1115; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Analiza] Oszustwo na DPD. Jeden klik, "błędny numer domu" i puste konto. Jak działa nowy smishing?</h1>
+        <span class="date">Opublikowano: 8 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>Wyobraź sobie sytuację: czekasz na zamówioną przesyłkę lub po prostu często kupujesz w sieci. Nagle na Twój telefon przychodzi wiadomość SMS, rzekomo od firmy kurierskiej DPD. Treść brzmi alarmująco: <em>"Twoja paczka nie może zostać dostarczona z powodu braku numeru domu. Zaktualizuj informacje o dostawie"</em>. Pod spodem znajduje się skrócony, niepozorny link. Wystarczy chwila nieuwagi, jeden klik, a Twoje oszczędności mogą zniknąć.</p> 
+        
+        <p>W dzisiejszej analizie laboratoryjnej bierzemy pod lupę kampanię smishingową wymierzoną w polskich klientów firm kurierskich, przed którą oficjalnie ostrzega policja oraz zespoły CSIRT.</p>
+
+        <h2>Anatomia manipulacji: Presja czasu i fałszywy formularz</h2>
+        <p>Przestępcy wykorzystują prosty mechanizm psychologiczny – **ciekawość i lęk przed utratą paczki**. Gdy ofiara klika w link zawarty w wiadomości SMS, nie trafia na oficjalną stronę DPD, lecz na jej perfekcyjnie przygotowaną kopię. Strona wyłudzająca dane (phishing page) krok po kroku prowadzi użytkownika przez proces "aktualizacji adresu".</p>
+        
+        <p>Scenariusz oszustwa przebiega następująco:</p>
+        <ol>
+            <li><strong>Fałszywy formularz adresowy:</strong> Ofiara proszona jest o ponowne wpisanie imienia, nazwiska, ulicy i rzekomo brakującego "numeru domu". Ma to na celu uwiarygodnienie całej procedury.</li>
+            <li><strong>Wymóg symbolicznej opłaty:</strong> System informuje, że z powodu ponownej autoryzacji lub przetrzymania paczki w magazynie należy uiścić drobną opłatę manipulacyjną (np. 1,50 zł lub 2,00 zł).</li>
+            <li><strong>Przejęcie karty płatniczej:</strong> W celu dokonania opłaty strona prosi o podanie pełnych danych karty: numeru, daty ważności oraz kodu CVV. W tym momencie dane lecą prosto do bazy oszustów.</li>
+        </ol>
+
+        <div class="important-note">
+            <strong>Pamiętaj:</strong> Firmy kurierskie nigdy nie blokują dostarczenia przesyłek z powodu drobnych braków adresowych w sposób wymagający dopłat przez internetowe linki. Jeśli kurier nie może znaleźć adresu, zazwyczaj kontaktuje się telefonicznie lub zostawia paczkę w najbliższym punkcie odbioru.
+        </div>
+
+        <h2>Co przestępcy robią z Twoimi danymi?</h2>
+        <p>Oszustów nie interesuje Twoje 2 złote opłaty manipulacyjnej. Po przejęciu danych karty płatniczej natychmiast podpinają ją pod cyfrowe portfele (np. Apple Pay czy Google Pay) na własnych urządzeniach lub realizują transakcje na platformach międzynarodowych. Zanim zorientujesz się, że coś jest nie tak, z Twojego konta mogą zniknąć tysiące złotych w postaci serii szybkich transakcji bezgotówkowych.</p>
+
+        <h2>Antidotum: Jak zweryfikować taki atak?</h2>
+        <p>Obrona przed tą toksyną wymaga wdrożenia kilku prostych nawyków:</p>
+        <ul>
+            <li><strong>Analiza adresu URL:</strong> Zawsze patrz na pasek adresu w przeglądarce. Oficjalna strona to <code>dpd.com.pl</code>. Oszuści korzystają z losowych domen, np. <code>dpd-polska-edycja.com</code> lub zupełnie losowych ciągów znaków zarejestrowanych na kilka dni przed atakiem.</li>
+            <li><strong>Weryfikacja w oficjalnej aplikacji:</strong> Jeśli rzeczywiście czekasz na paczkę od DPD, pobierz oficjalną aplikację kurierską lub wpisz numer przesyłki bezpośrednio na bezpiecznej, oficjalnej stronie przewoźnika.</li>
+            <li><strong>Zgłaszaj podejrzane wiadomości:</strong> Każdy podejrzany SMS z linkiem możesz bezpłatnie przekazać do analizy ekspertom z CERT Polska, przesyłając go na numer <code>8080</code>.</li>
+        </ul>
+
+        <h2>Co zrobić, jeśli dane zostały wpisane?</h2>
+        <p>Jeśli kliknąłeś i podałeś dane swojej karty na fałszywej stronie:</p>
+        <ol>
+            <li><strong>Natychmiast zastrzeż kartę:</strong> Zrób to przez aplikację bankową lub dzwoniąc na infolinię swojego banku (możesz też użyć międzybankowego numeru alarmowego <code>+48 828 828 828</code>).</li>
+            <li><strong>Monitoruj historię konta:</strong> Sprawdź, czy nie doszło już do nieautoryzowanych blokad środków.</li>
+            <li><strong>Zgłoś sprawę:</strong> Poinformuj bank o incydencie phishingu, zgłoś sprawę na Policję oraz do CERT Polska.</li>
+        </ol>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemik.w.sieci@proton.me</p>
+    </footer>
+
+</body>
+</html>
