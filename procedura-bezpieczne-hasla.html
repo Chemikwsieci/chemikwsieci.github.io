@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Procedura] Zasady bezpiecznych haseł i haseł-fraz | Chemik w Sieci</title>
+    <!-- Kod analityki Umami -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="TUTAJ_TWÓJ_UNIKALNY_ID"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #e0e0e0; background-color: #121212; max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { border-bottom: 2px solid #00ffcc; padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: #00ffcc; margin: 0 0 10px 0; font-size: 2em; }
+        h2 { color: #00ffcc; margin-top: 30px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        h3 { color: #ff3366; }
+        a { color: #00ffcc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .date { color: #888; font-size: 0.9em; display: block; margin-bottom: 20px; }
+        .important-note { border-left: 3px solid #8a4fff; margin: 20px 0; padding: 10px 15px; color: #d1b3ff; background: #15111a; border-radius: 0 5px 5px 0; }
+        .nav-back { margin-bottom: 20px; display: inline-block; }
+        pre { background: #1e1e1e; padding: 15px; border-radius: 5px; border: 1px solid #333; overflow-x: auto; font-family: "Courier New", Courier, monospace; font-size: 0.9em; color: #a9ffb2; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="nav-back">← Powrót do laboratorium</a>
+        <h1>[Procedura] Śmierć tradycyjnych haseł: Nowoczesne reguły tworzenia silnych zabezpieczeń według standardów NIST</h1>
+        <span class="date">Opublikowano: 8 lipca 2026 | Autor: Chemik w Sieci</span>
+    </header>
+
+    <main>
+        <p>Przez lata działy IT oraz systemy internetowe zmuszały nas do tworzenia haseł pokroju <code>P@55w0rd!</code> – skomplikowanych dla człowieka do zapamiętania, a jednocześnie banalnych dla komputera do złamania. Co gorsza, wymóg regularnej zmiany hasła co 30 czy 90 dni sprawiał jedynie, że użytkownicy zmieniali cyfrę na końcu (np. z 1 na 2). Najwyższy czas porzucić te przestarzałe nawyki.</p> 
+        
+        <p>W dzisiejszej procedurze laboratoryjnej wdrożymy nowoczesne wytyczne amerykańskiego instytutu **NIST (National Institute of Standards and Technology)**. Nauczysz się tworzyć hasła, których złamanie metodą brute-force zajmie maszynom miliardy lat, a dla Ciebie będą proste do zapamiętania.</p>
+
+        <h2>Krok 1: Długość ponad skomplikowanie (Zrozumieć entropię)</h2>
+        <p>Współczesne algorytmy łamiące hasła radzą sobie ze znakami specjalnymi w ułamku sekundy, jeśli samo hasło jest krótkie. Prawdziwym wrogiem komputerów jest **długość wiadomości**. Zamiast tworzyć "silne hasło" (password), stwórz **frazę paszportową (passphrase)**.</p>
+        
+        <p><strong>Porównanie laboratoryjne:</strong></p>
+        <ul>
+            <li><code>TrUdN3h@sLo!</code> (12 znaków) – Wydaje się silne, ale zaawansowane klastry GPU rozszyfrują je w kilka dni ze względu na powszechne schematy podstawień (np. "E" na "3", "A" na "@").</li>
+            <li><code>fioletowy-smok-pije-kefir-w-chmurze</code> (35 znaków) – Składa się z prostych, małych liter i kresek. Człowiek zapamięta je w minutę jako prosty obraz w głowie. Dla algorytmów łamiących jest to jednak bariera nie do przebicia. Złamanie tej frazy zajęłoby biliony lat.</li>
+        </ul>
+
+        <h2>Krok 2: Żelazne reguły nowoczesnej higieny haseł</h2>
+        <p>Aby Twoja tożsamość cyfrowa była bezpieczna, Twoja osobista procedura musi opierać się na trzech filarach:</p>
+        <ol>
+            <li><strong>Zasada unikalności (Jedno konto = jedno hasło):</strong> Najczęstszą przyczyną utraty kont nie jest ich zhakowanie, lecz wyciek bazy danych z jakiegoś niszowego forum czy sklepu ogrodniczego, gdzie użyłeś tego samego hasła co do skrzynki mailowej. Jeśli dane wyciekną z jednego miejsca, ucierpieć może tylko to jedno miejsce.</li>
+            <li><strong>Koniec z wymuszoną rotacją:</strong> Zgodnie z najnowszymi standardami, hasła należy zmieniać **tylko wtedy, gdy istnieje podejrzenie ich skompromitowania lub wycieku**. Regularna, bezpodstawna zmiana prowadzi jedynie do obniżania jakości haseł przez użytkowników.</li>
+            <li><strong>Bezwzględna eliminacja słowników:</strong> Hasła nie mogą zawierać Twojego imienia, nazwiska, daty urodzenia, nazwy serwisu (np. <code>allegro2026</code>) ani sekwencji klawiatury (np. <code>qwerty</code>, <code>123456</code>). Ataki słownikowe błyskawicznie sprawdzają takie kombinacje.</li>
+        </ol>
+
+        <div class="important-note">
+            <strong>Wskazówka Chemika:</strong> Jak ogarnąć kilkadziesiąt długich i unikalnych haseł-fraz? Użyj cyfrowego sejfu, czyli <strong>menedżera haseł</strong> (np. sprawdzonych i otwartoźródłowych rozwiązań takich jak Bitwarden czy KeePassXC). Wtedy musisz zapamiętać tylko jedno, potężne hasło główne (Master Passphrase) do samego sejfu, a resztę haseł program wygeneruje i uzupełni za Ciebie.
+        </div>
+
+        <h2>Krok 3: Ostateczna linia obrony – 2FA</h2>
+        <p>Nawet najsilniejsza fraza-hasło może polec w starciu z zaawansowanym phishingiem, o którym pisałem w analizach incydentów (np. przy omijaniu sesji M365). Dlatego każda procedura tworzenia haseł musi kończyć się **włączeniem uwierzytelniania dwuskładnikowego (2FA/MFA)**.</p>
+        <p>Zamiast zawodnych kodów SMS, wybieraj aplikacje uwierzytelniające (np. Google Authenticator, Aegis) lub klucze sprzętowe U2F/FIDO2. Wówczas, nawet jeśli oszust pozna Twoje 40-znakowe hasło, bez fizycznego dostępu do Twojego drugiego składnika nie zaloguje się do systemu.</p>
+
+        <h2>Zadanie w laboratorium</h2>
+        <p>Przejrzyj dzisiaj swoje najważniejsze konta (mail główny, bankowość, profil zaufany). Sprawdź, czy hasła do nich nie powtarzają się w innych miejscach sieci. Jeśli tak – zamień je na unikalne, długie frazy składające się z co najmniej 4 losowych słów. Bezpieczeństwo to proces, nie jednorazowy stan!</p>
+    </main>
+
+    <footer>
+        <p style="text-align: center; color: #666; margin-top: 50px;">© 2026 Chemik w Sieci. Kontakt: chemik.w.sieci@proton.me</p>
+    </footer>
+
+</body>
+</html>
